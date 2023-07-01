@@ -314,14 +314,23 @@ int board_late_init(void)
 #define IS_RANGE(x, min, max)   ((x) > (min) && (x) < (max))
 
 	int adc = get_adc_value(2);
+	int family = get_cpu_id().family_id;
+	int package = get_cpu_id().package_id;
 	printf("ADC:%d\n", adc);
+	printf("FAMILY:%d\n",family);
+	printf("PACKAGE:%d\n",package);
 
-	if (IS_RANGE(adc, 450, 550)) {
+	/* Unfortunately while the ADC is avialable, both devices ADC values
+           are within the tolerance range of each other (IS_RANGE(adc, 510, 550)
+           therefor we need to use an alternative.  The S922X SoC is 0x40 (64),
+           and the A311D SoC is 0x10 (16). */
+
+	if (package == 64) {
 		setenv("variant", "gou");
-		board_set_dtbfile("meson-g12b-odroid-go-ultra.dtb");
+		setenv("fdtfile", "meson-g12b-odroid-go-ultra.dtb");
 	} else {
 		setenv("variant", "max3");
-		board_set_dtbfile("meson-g12b-powkiddy-rgb10-max-3.dtb");
+		setenv("fdtfile", "meson-g12b-powkiddy-rgb10-max-3.dtb");
 	}
 
 	// board_set_dtbfile("meson64_odroid%s.dtb");

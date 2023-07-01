@@ -30,7 +30,7 @@ extern int get_adc_value(int channel);
 int board_revision(void);
 void board_set_dtbfile(const char *format);
 
-#if defined(CONFIG_ODROID_N2)
+/* #if defined(CONFIG_ODROID_N2)
 int board_is_odroidn2plus(void);
 #elif defined(CONFIG_ODROID_C4)
 int board_is_odroidc4(void);
@@ -39,7 +39,7 @@ int board_is_odroidhc4(void);
 int board_is_odroidgo4(void);
 #elif defined(CONFIG_ODROID_GOU)
 int board_is_odroidgou(void);
-#endif
+#endif */
 
 /*
  * CVBS
