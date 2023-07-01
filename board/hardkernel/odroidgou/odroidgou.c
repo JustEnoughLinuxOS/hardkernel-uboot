@@ -311,8 +311,20 @@ int board_late_init(void)
 	gou_bmp_display(DISP_LOGO);
 #endif
 
-	setenv("variant", "gou");
-	board_set_dtbfile("meson64_odroid%s.dtb");
+#define IS_RANGE(x, min, max)   ((x) > (min) && (x) < (max))
+
+	int adc = get_adc_value(2);
+	printf("ADC:%d\n", adc);
+
+	if (IS_RANGE(adc, 450, 550)) {
+		setenv("variant", "gou");
+		board_set_dtbfile("meson-g12b-odroid-go-ultra.dtb");
+	} else {
+		setenv("variant", "max3");
+		board_set_dtbfile("meson-g12b-powkiddy-rgb10-max-3.dtb");
+	}
+
+	// board_set_dtbfile("meson64_odroid%s.dtb");
 
 	if (board_check_recovery() < 0) {
 		gou_bmp_display(DISP_SYS_ERR);
