@@ -320,7 +320,7 @@ int board_late_init(void)
 	printf("FAMILY:%d\n",family);
 	printf("PACKAGE:%d\n",package);
 
-	/* Unfortunately while the ADC is avialable, both devices ADC values
+	/* Unfortunately while the ADC is available, both devices ADC values
            are within the tolerance range of each other (IS_RANGE(adc, 510, 550)
            therefor we need to use an alternative.  The S922X SoC is 0x40 (64),
            and the A311D SoC is 0x10 (16). */
