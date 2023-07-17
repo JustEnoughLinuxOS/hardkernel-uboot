@@ -348,6 +348,8 @@ int board_late_init(void)
 	}
 	switch (get_bootmode()) {
 		case BOOTMODE_RECOVERY :
+			setenv("variant", "gou");
+			board_set_dtbfile("meson64_odroid%s.dtb");
 			gou_bmp_display(DISP_RECOVERY);
 			mdelay(2000);
 		break;
