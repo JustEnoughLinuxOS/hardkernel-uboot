@@ -14,8 +14,8 @@
 #define ODROID_BOARD_UUID		"909802f2-a1dd-11e8-98d0-529269fb1459"
 
 /* configs for CEC */
-//define CONFIG_CEC_OSD_NAME		"ODROID-GOU"
-//#define CONFIG_CEC_WAKEUP
+#define CONFIG_CEC_OSD_NAME		"ODROID-GOU"
+#define CONFIG_CEC_WAKEUP
 
 #include <asm/arch/cpu.h>
 #include <linux/sizes.h>
@@ -316,16 +316,16 @@
 
 /* DISPLAY & HDMITX */
 //#define CONFIG_AML_HDMITX20			1
-#define CONFIG_AML_CANVAS			1
-#define CONFIG_AML_VOUT				1
-#define CONFIG_AML_OSD				1
-#define CONFIG_OSD_SCALE_ENABLE			1
-#define CONFIG_CMD_BMP				1
+#undef CONFIG_AML_CANVAS
+#undef CONFIG_AML_VOUT
+#undef CONFIG_AML_OSD
+#undef CONFIG_OSD_SCALE_ENABLE	
+#undef CONFIG_CMD_BMP	
 
-#define CONFIG_AML_LCD    1
-#define CONFIG_AML_LCD_TABLET 1
-#define CONFIG_AML_LCD_EXTERN 1
-#define CONFIG_AML_LCD_EXTERN_MIPI_KD50T048A 1
+#undef CONFIG_AML_LCD
+#undef CONFIG_AML_LCD_TABLET
+#undef CONFIG_AML_LCD_EXTERN
+#undef CONFIG_AML_LCD_EXTERN_MIPI_KD50T048A
 
 /* gzip compressed bmp images */
 //#define CONFIG_VIDEO_BMP_GZIP			1
