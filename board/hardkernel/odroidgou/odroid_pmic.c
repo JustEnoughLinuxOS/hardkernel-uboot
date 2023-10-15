@@ -191,7 +191,10 @@ int odroid_charge_enable(struct pmic *p_fg)
 int board_check_power(void)
 {
 	int pwron_src, bootmode;
-	unsigned int cap = 0, offset=0;
+	unsigned int cap = 0;
+#ifdef CONFIG_AML_LCD
+	unsigned int offset=0;
+#endif
 
 	// check pwr on source
 	pwron_src = odroid_check_pwron_src();
@@ -201,15 +204,18 @@ int board_check_power(void)
 	if ((pwron_src != PWRON_KEY) && (bootmode == BOOTMODE_NORMAL)) {
 		if((pwron_src == PWRON_USB) && (get_battery_cap() > 0))
 			return 0;
+#ifdef CONFIG_AML_LCD
 		else
 			gou_init_lcd();
-		
+#endif
+
 		/* RK817 BOOST, OTG_POWER(USB A-type VBUS) disable */
 		rk817_i2c_write(RK817_POWER_EN3, 0xf0);
 		printf("battery charge state\n");
 		while(1) {
 			cap = get_battery_cap();
 			printf("rk818_bat: capacity=[%d]\n",cap);
+#ifdef CONFIG_AML_LCD
 			if (cap < 25)
 				offset = DISP_BATT_0;
 			else if (cap < 60)
@@ -218,7 +224,6 @@ int board_check_power(void)
 				offset = DISP_BATT_2;
 			else
 				offset = DISP_BATT_3;
-
 			gou_bmp_display(offset);
 			mdelay(750);
 			charger_led_bilnk(0);
@@ -228,6 +233,7 @@ int board_check_power(void)
 				gou_bmp_display(offset);
 
 			mdelay(750);
+#endif
 			charger_led_bilnk(0);
 
 			if(check_charge_exit_key())
