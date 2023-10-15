@@ -334,12 +334,12 @@ int board_late_init(void)
 	// board_set_dtbfile("meson64_odroid%s.dtb");
 
 	if (board_check_recovery() < 0) {
-		gou_bmp_display(DISP_SYS_ERR);
+		//gou_bmp_display(DISP_SYS_ERR);
 		mdelay(4000);
 		run_command("poweroff", 0);
 	} else {
 		if (board_check_power() < 0) {
-			gou_bmp_display(DISP_BATT_LOW);
+			//gou_bmp_display(DISP_BATT_LOW);
 			mdelay(2000);
 			run_command("poweroff", 0);
 		}
@@ -348,15 +348,15 @@ int board_late_init(void)
 		case BOOTMODE_RECOVERY :
 			setenv("variant", "gou");
 			board_set_dtbfile("meson64_odroid%s.dtb");
-			gou_bmp_display(DISP_RECOVERY);
+			//gou_bmp_display(DISP_RECOVERY);
 			mdelay(2000);
 		break;
 		case BOOTMODE_TEST :
-			gou_bmp_display(DISP_TEST);
+			//gou_bmp_display(DISP_TEST);
 			mdelay(2000);
 		break;
 		default :
-			gou_bmp_display(DISP_LOGO);
+			//gou_bmp_display(DISP_LOGO);
 		break;
 	}
 	return 0;
